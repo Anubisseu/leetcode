@@ -1,4 +1,4 @@
-package cn.edu.seu.kse.anubis.house_robber_198;
+package cn.edu.seu.kse.anubis.n198_house_robber;
 
 import org.junit.Test;
 
