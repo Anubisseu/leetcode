@@ -76,7 +76,15 @@ public class HouseRobberII {
                 }
 
 //                System.out.printf("circle  left %d, right %d, mid %d%n", rightl,leftr,i);
-                tmp=max(solution,rightl,leftr)+solution[i][i];
+                if(len==3){
+                    tmp=solution[i][i];
+
+                }else if(len==2){
+                    tmp=solution[i][i];
+                }else{
+                    tmp=max(solution,rightl,leftr)+solution[i][i];
+                }
+
 
 
                 if(tmp>max){

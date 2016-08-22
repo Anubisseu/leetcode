@@ -8,7 +8,8 @@ import org.junit.Test;
 public class HouseRobberIITest {
     @Test
     public void test(){
-        int [] nums={1,2,3,4,5,6};
+//        int [] nums={1,2,3,4,5,6};
+        int [] nums={1,1};
         HouseRobberII hr=new HouseRobberII();
 
         System.out.println(hr.rob(nums));
