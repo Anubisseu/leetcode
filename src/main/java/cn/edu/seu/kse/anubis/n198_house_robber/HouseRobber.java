@@ -1,4 +1,6 @@
-package cn.edu.seu.kse.anubis.house_robber_198;
+package cn.edu.seu.kse.anubis.n198_house_robber;
+
+import java.util.Arrays;
 
 /**
  * Created by 王彬 on 2016/8/20.
@@ -29,8 +31,12 @@ public class HouseRobber {
             }
         }
 
+//        System.out.println(Arrays.deepToString(solution));
 
-        return max(solution, 0, len - 1);
+
+        int max= max(solution, 0, len - 1);
+        printArray(solution);
+        return max;
     }
 
     public int max(int[][] solution, int l, int r) {
@@ -60,5 +66,16 @@ public class HouseRobber {
         }
         solution[l][r] = max;
         return max;
+    }
+
+    public void printArray(int[][] solution){
+        int len=solution.length;
+
+        for(int i=0;i<len;i++){
+            for(int j=0;j<len;j++){
+                System.out.printf("%d, ",solution[i][j]);
+            }
+            System.out.println("");
+        }
     }
 }
