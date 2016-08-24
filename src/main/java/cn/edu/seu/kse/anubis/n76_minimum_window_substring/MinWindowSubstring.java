@@ -14,33 +14,69 @@ public class MinWindowSubstring {
         String tmpwin="";
         int len=t.length();
         HashMap<Character,Integer> position=new HashMap<>();
+        HashMap<Character, Integer> cnt=new HashMap<>();
+        HashMap<Character, Integer> find=new HashMap<>();
         List<Integer> startpos=new ArrayList<>();
         startpos.add(-1);
 
 
+        int ccnt=0;
+        char tmpch;
         for(int i=0;i<len;i++){
-            position.put(t.charAt(i),-1);
+            ccnt=0;
+            tmpch=t.charAt(i);
+            position.put(tmpch,-1);
+            if(cnt.containsKey(tmpch)){
+                ccnt=cnt.get(tmpch);
+            }
+            cnt.put(tmpch,ccnt+1);
+            find.put(tmpch,0);
         }
         int start=0, end=-1;
         len=s.length();
+        boolean iscomplete=false;
+        char key;
+        int val;
+
+//        System.out.println(cnt);
+
         for(int i=0;i<len;i++){
             char ch=s.charAt(i);
-            if(position.containsKey(ch)){
+            if(find.containsKey(ch)){
                 startpos.add(i);
                 if(start==0){
                     start++;
-                }else if(ch==s.charAt(startpos.get(start))){
-                    start=getNextStart(s,startpos,start);
                 }
-                position.put(ch,i);
+                ccnt=find.get(ch);
+                find.put(ch,ccnt+1);
 
-                if(!position.containsValue(-1)){
-                    tmpwin=s.substring(startpos.get(start),i+1);
-                    if(window.equals("") || window.length()>tmpwin.length()){
-                        window=tmpwin;
+                iscomplete=true;
+
+                while (iscomplete){
+                    for(HashMap.Entry<Character,Integer> entry : find.entrySet()){
+                        key=entry.getKey();
+                        val=entry.getValue();
+
+                        if(val>=cnt.get(key)){
+                            continue;
+                        }else {
+                            iscomplete=false;
+                            break;
+                        }
                     }
-                    position.put(s.charAt(startpos.get(start)), -1);
-                    start=getNextStart(s,startpos,start);
+
+                    if(iscomplete){
+                        tmpwin=s.substring(startpos.get(start),i+1);
+                        if(window.equals("") || window.length()>tmpwin.length()){
+                            window=tmpwin;
+                        }
+                        key=tmpwin.charAt(0);
+                        val=find.get(key)-1;
+                        find.put(key,val);
+                        start++;
+                    }
+//                    System.out.println(window +" " + tmpwin);
+//                    System.out.println(find);
                 }
             }
         }
@@ -48,17 +84,34 @@ public class MinWindowSubstring {
         return window;
     }
 
-    public int getNextStart(String s,List<Integer> startpos, int start){
+    public int getNextStart(String s,List<Integer> startpos, HashMap<Character, Integer> cnt, int start){
         int next=start;
+        char stch=s.charAt(startpos.get(start));
+        int gap=cnt.get(stch);
         do{
             next++;
-            if(next==startpos.size()){
+            if(next+gap>=startpos.size()){
                 next-=1;
                 break;
             }
         }
-        while (s.charAt(startpos.get(next)) == s.charAt(startpos.get(start)));
+        while (isSkip(s,gap,next,stch,startpos));
 
         return next;
+    }
+
+    public boolean isSkip(String s, int gap, int next, char stch, List<Integer> startpos){
+        boolean res=true;
+
+        for(int i=0;i<gap;i++){
+            if(stch==s.charAt(startpos.get(next+i))){
+                continue;
+            }else {
+                res=false;
+                break;
+            }
+        }
+
+        return res;
     }
 }

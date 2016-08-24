@@ -8,10 +8,10 @@ import org.junit.Test;
 public class MinWindowSubstringTest {
     @Test
     public void test(){
-//        String s="ADOBCECODEBANCBA";
-//        String t="ABC";
-        String s="a";
-        String t="a";
+        String s="ADOBCECODEBANCB";
+        String t="ABC";
+//        String s="a";
+//        String t="aa";
         MinWindowSubstring ms=new MinWindowSubstring();
 
         String min=ms.minWindow(s,t);
