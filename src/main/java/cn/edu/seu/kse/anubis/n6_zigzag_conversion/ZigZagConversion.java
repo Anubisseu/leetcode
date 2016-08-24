@@ -5,6 +5,39 @@ package cn.edu.seu.kse.anubis.n6_zigzag_conversion;
  */
 public class ZigZagConversion {
     public String convert(String s, int numRows) {
+        if(numRows == 1){
+            return s;
+        }
+
+
+
+        StringBuilder[] strs=new StringBuilder[numRows];
+        StringBuilder res=new StringBuilder();
+
+        int len=s.length();
+
+        for(int i=0;i<numRows;i++){
+            strs[i]=new StringBuilder();
+        }
+
+        int rows=0;
+        int step=1;
+        for(int i=0;i<len;i++){
+            strs[rows].append(s.charAt(i));
+            if(rows == 0){step=1;}
+
+            if(rows == numRows-1){step=-1;}
+            rows+=step;
+        }
+
+        for(StringBuilder sb:strs){
+            res.append(sb.toString());
+        }
+        return res.toString();
+    }
+
+
+    public String convert1(String s, int numRows) {
         if(numRows==1){
             return s;
         }

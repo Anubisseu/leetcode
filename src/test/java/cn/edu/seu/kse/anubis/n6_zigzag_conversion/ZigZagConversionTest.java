@@ -9,7 +9,7 @@ public class ZigZagConversionTest {
     @Test
     public void test(){
         String s="PAYPALISHIRING";
-        int nRows=3;
+        int nRows=1;
 //        String s="ABCD";
 //        int nRows=2;
         String res="PAHNAPLSIIGYIR";
