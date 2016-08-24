@@ -8,6 +8,19 @@ import org.junit.Test;
 public class ZigZagConversionTest {
     @Test
     public void test(){
+        String s="PAYPALISHIRING";
+        int nRows=3;
+//        String s="ABCD";
+//        int nRows=2;
+        String res="PAHNAPLSIIGYIR";
+        ZigZagConversion zc=new ZigZagConversion();
+        System.out.println(zc.convert(s,nRows));
+        System.out.println(res);
+    }
 
+    @Test
+    public void testMathCeil(){
+        System.out.println(Math.ceil(5/2.0));
+        System.out.println(Math.ceil(4/2.0));
     }
 }
